@@ -1,0 +1,16 @@
+# Mario Party 9 (Europe) - SSQP01
+# See config.example.yml for documentation.
+object_base: orig/SSQP01
+object: sys/main.dol
+hash: afe7ff0100ddd758ffa7980f18de3eacd8a04659
+symbols: config/SSQP01/symbols.txt
+splits: config/SSQP01/splits.txt
+mw_comment_version: 15
+# The game's REL modules (files/modules/*.rel.lz, NLZSS-compressed) are not
+# tracked yet. They will be added once the DOL is in good shape.
+ldscript_template: config/SSQP01/ldscript.tpl
+# Symbols referenced only from REL modules (not linked yet), which the
+# original DOL link kept alive.
+force_active:
+- __ptmf_cmpr
+- __ptmf_cast

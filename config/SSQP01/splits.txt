@@ -1,0 +1,169 @@
+Sections:
+	.init       type:code align:4
+	extab       type:rodata align:8
+	extabindex  type:rodata align:32
+	.text       type:code align:4
+	.ctors      type:rodata align:16
+	.dtors      type:rodata align:8
+	.rodata     type:rodata align:32
+	.data       type:data align:32
+	.sdata      type:data align:16
+	.sbss       type:bss align:32
+	.sdata2     type:rodata align:8
+	.sbss2      type:bss align:32
+	.bss        type:bss align:64
+
+revolution/base/PPCArch.c:
+	.text       start:0x8017BDC0 end:0x8017BFD0
+	.data       start:0x8024D848 end:0x8024D880
+
+revolution/os/OSArena.c:
+	.text       start:0x8017DFB0 end:0x8017E110
+	.sdata      start:0x8026DDD0 end:0x8026DDD8
+	.sbss       start:0x8026E6D8 end:0x8026E6E0
+
+revolution/os/OSCache.c:
+	.text       start:0x8017E5D0 end:0x8017EC28
+	.data       start:0x8024DD20 end:0x8024DEA8
+
+revolution/os/OSSync.c:
+	.text       start:0x801860E0 end:0x80186160
+
+Runtime.PPCEABI.H/__va_arg.c:
+	.text       start:0x8020B3EC end:0x8020B4B4
+
+Runtime.PPCEABI.H/global_destructor_chain.c:
+	.text       start:0x8020B4B4 end:0x8020B514
+	.sbss       start:0x8026EE08 end:0x8026EE0C
+
+Runtime.PPCEABI.H/ptmf.c:
+	.text       start:0x8020BDC8 end:0x8020BE80
+
+Runtime.PPCEABI.H/runtime.c:
+	.text       start:0x8020BE80 end:0x8020C668
+	.rodata     start:0x80237480 end:0x80237498
+
+Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
+	.text       start:0x8020C668 end:0x8020C6D8
+	.ctors      start:0x80220520 end:0x80220524 rename:.ctors$10
+	.dtors      start:0x80220600 end:0x80220604 rename:.dtors$10
+	.dtors      start:0x80220604 end:0x80220608 rename:.dtors$15
+	.sdata      start:0x8026E268 end:0x8026E270
+
+MSL_C/math/e_acos.c:
+	.text       start:0x802171C0 end:0x8021748C
+	.sdata2     start:0x80270810 end:0x80270898
+
+MSL_C/math/e_asin.c:
+	.text       start:0x8021748C end:0x80217724
+	.sdata2     start:0x80270898 end:0x80270920
+
+MSL_C/math/e_atan2.c:
+	.text       start:0x80217724 end:0x8021797C
+	.sdata2     start:0x80270920 end:0x80270978
+
+MSL_C/math/e_fmod.c:
+	.text       start:0x8021797C end:0x80217CFC
+	.rodata     start:0x80238128 end:0x80238138
+
+MSL_C/math/e_log.c:
+	.text       start:0x80217CFC end:0x80217FB0
+	.sbss       start:0x8026EE40 end:0x8026EE48
+	.sdata2     start:0x80270978 end:0x802709F8
+
+MSL_C/math/e_log10.c:
+	.text       start:0x80217FB0 end:0x802180C4
+	.sbss       start:0x8026EE48 end:0x8026EE50
+	.sdata2     start:0x802709F8 end:0x80270A28
+
+MSL_C/math/e_pow.c:
+	.text       start:0x802180C4 end:0x802188D8
+	.rodata     start:0x80238138 end:0x80238168
+	.sdata2     start:0x80270A28 end:0x80270B38
+
+MSL_C/math/e_rem_pio2.c:
+	.text       start:0x802188D8 end:0x80218C5C
+	.rodata     start:0x80238168 end:0x802382F0
+	.sdata2     start:0x80270B38 end:0x80270B90
+
+MSL_C/math/k_cos.c:
+	.text       start:0x80218C5C end:0x80218D6C
+	.sdata2     start:0x80270B90 end:0x80270BD8
+
+MSL_C/math/k_rem_pio2.c:
+	.text       start:0x80218D6C end:0x8021A424
+	.rodata     start:0x802382F0 end:0x80238340
+	.sdata2     start:0x80270BD8 end:0x80270C18
+
+MSL_C/math/k_sin.c:
+	.text       start:0x8021A424 end:0x8021A4E4
+	.sdata2     start:0x80270C18 end:0x80270C50
+
+MSL_C/math/k_tan.c:
+	.text       start:0x8021A4E4 end:0x8021A734
+	.rodata     start:0x80238340 end:0x802383A8
+	.sdata2     start:0x80270C50 end:0x80270C88
+
+MSL_C/math/s_atan.c:
+	.text       start:0x8021A734 end:0x8021A964
+	.rodata     start:0x802383A8 end:0x80238440
+	.sdata2     start:0x80270C88 end:0x80270CB0
+
+MSL_C/math/s_ceil.c:
+	.text       start:0x8021A964 end:0x8021AAB0
+	.sdata2     start:0x80270CB0 end:0x80270CC0
+
+MSL_C/math/s_copysign.c:
+	.text       start:0x8021AAB0 end:0x8021AADC
+
+MSL_C/math/s_cos.c:
+	.text       start:0x8021AADC end:0x8021ABA4
+	.sdata2     start:0x80270CC0 end:0x80270CC8
+
+MSL_C/math/s_floor.c:
+	.text       start:0x8021ABA4 end:0x8021ACF4
+	.sdata2     start:0x80270CC8 end:0x80270CD8
+
+MSL_C/math/s_frexp.c:
+	.text       start:0x8021ACF4 end:0x8021AD7C
+	.sdata2     start:0x80270CD8 end:0x80270CE0
+
+MSL_C/math/s_ldexp.c:
+	.text       start:0x8021AD7C end:0x8021AEE8
+	.sdata2     start:0x80270CE0 end:0x80270D08
+
+MSL_C/math/s_modf.c:
+	.text       start:0x8021AEE8 end:0x8021AFE4
+
+MSL_C/math/s_sin.c:
+	.text       start:0x8021AFE4 end:0x8021B0B0
+	.sdata2     start:0x80270D08 end:0x80270D10
+
+MSL_C/math/s_tan.c:
+	.text       start:0x8021B0B0 end:0x8021B128
+	.sdata2     start:0x80270D10 end:0x80270D18
+
+MSL_C/math/w_acos.c:
+	.text       start:0x8021B128 end:0x8021B12C
+
+MSL_C/math/w_asin.c:
+	.text       start:0x8021B12C end:0x8021B130
+
+MSL_C/math/w_atan2.c:
+	.text       start:0x8021B130 end:0x8021B134
+
+MSL_C/math/w_fmod.c:
+	.text       start:0x8021B134 end:0x8021B138
+
+MSL_C/math/w_log10.c:
+	.text       start:0x8021B138 end:0x8021B13C
+
+MSL_C/math/w_pow.c:
+	.text       start:0x8021B13C end:0x8021B140
+
+MSL_C/math/e_sqrt.c:
+	.text       start:0x8021B140 end:0x8021B388
+	.sdata2     start:0x80270D18 end:0x80270D20
+
+MSL_C/math/w_sqrt.c:
+	.text       start:0x8021B38C end:0x8021B390
