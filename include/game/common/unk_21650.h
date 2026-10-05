@@ -49,7 +49,12 @@ public:
     int* end() { return mData + mSize; }
     u32 size() const { return mSize; }
     int& operator[](u32 i) { return mData[i]; }
+    int& back() { return mData[mSize - 1]; }
     int* InsertImpl(int* pos, const int& x, FalseType);
+    void erase(int* pos) {
+        memmove(pos, pos + 1, (end() - pos - 1) * sizeof(int));
+        --mSize;
+    }
 
     int* mData;
     u32 mSize;
@@ -118,6 +123,7 @@ struct CursorInfo {
     u8 useOverride;
     u8 padB;
     f32 scale;
+    u8 pad10[8];
 };
 
 struct Vec2f {
@@ -126,24 +132,33 @@ struct Vec2f {
 
 class HandCursor;
 
+/* vector<T*> is implemented on top of the vector<int> code */
 template <class T>
 class PtrVector {
 public:
     PtrVector();  /* fn_18_20F30 */
     ~PtrVector(); /* fn_18_1D7C0 */
 
-    T** begin() { return (T**)mImpl.mData; }
-    T** end() { return (T**)mImpl.mData + mImpl.mSize; }
-    u32 size() const { return mImpl.mSize; }
-    T*& operator[](u32 i) { return ((T**)mImpl.mData)[i]; }
-    T* back() { return ((T**)mImpl.mData)[mImpl.mSize - 1]; }
-    void insert(T** pos, T* const& x) { mImpl.InsertImpl((int*)pos, (const int&)x, FalseType()); }
-    void erase(T** pos) {
-        memmove(pos, pos + 1, (end() - pos - 1) * sizeof(T*));
-        --mImpl.mSize;
+    IntVector& Impl() { return *reinterpret_cast<IntVector*>(this); }
+    T** begin() { return mData; }
+    T** end() { return mData + mSize; }
+    u32 size() const { return mSize; }
+    T*& operator[](u32 i) { return mData[i]; }
+    void insert(T** pos, T* const& x) { Impl().InsertImpl((int*)pos, (const int&)x, FalseType()); }
+    void erase(T** pos) { Impl().erase((int*)pos); }
+    void remove(T* x) {
+        for (T** it = begin(); it != end(); ++it) {
+            if (*it == x) {
+                erase(it);
+                return;
+            }
+        }
     }
+    T*& back() { return mData[mSize - 1]; }
 
-    IntVector mImpl;
+    T** mData;
+    u32 mSize;
+    u32 mCapacity;
 };
 
 class CursorList2 {
@@ -164,7 +179,8 @@ class CursorManager : public Singleton<CursorManager> {
 public:
     CursorManager() : mRefCount(0) {}
 
-    HandCursor* Back(int i) { return mLists[i].size() != 0 ? mLists[i][mLists[i].size() - 1] : 0; }
+    HandCursor* FindActive(int idx);
+    HandCursor* Back(int i) { return mLists[i].size() != 0 ? mLists[i].back() : 0; }
 
     int mRefCount;
     PtrVector<HandCursor> mLists[4];
@@ -173,15 +189,30 @@ public:
     virtual ~CursorManager(); /* fn_18_20F50 */
 };
 
-class HandCursor {
-public:
-    ~HandCursor();
-    void Init();
-    void Setup(void* res);
-    void Update(TargetPane* pane);
-    static void UpdateCallback(void* self, int, void* pane); /* fn_18_22230 */
+/* HandCursor::SetPicture (fn_18_21DF0) is inlined by its callers, but its
+   string literals land in the translation unit's string pool, which only
+   happens for literals written in the calling function itself. */
+#define HAND_CURSOR_SET_PICTURE(cursor, picture)                                  do {                                                                              HandCursor* c_ = (cursor);                                                    int p_ = (picture);                                                           c_->Reset(0);                                                                 c_->mPicture = p_;                                                            if (c_->mEnabled) {                                                               c_->FindPane("Picture_00", 1)->SetVisible(false);                     c_->FindPane("Picture_01", 1)->SetVisible(false);                     c_->FindPane("Picture_02", 1)->SetVisible(false);                     switch (c_->mPicture) {                                                       case 1:                                                                           c_->FindPane("Picture_00", 1)->SetVisible(true);                      break;                                                                    case 2:                                                                           c_->FindPane("Picture_01", 1)->SetVisible(true);                      break;                                                                    case 3:                                                                           c_->FindPane("Picture_02", 1)->SetVisible(true);                      break;                                                                    }                                                                         }                                                                         } while (0)
 
-    /* main.dol */
+int fn_18_1BBC0(int player);
+BOOL fn_18_1BC20(int player);
+int fn_18_1BD40(int player);
+
+struct PadState {
+    u8 pad[0x5E];
+    s8 m5E;
+};
+void* fn_80070680(int pad);
+u8 fn_8006DE50(void* pad);
+PadState* fn_8006E330(void* pad, int);
+u32 fn_80070DC0();
+
+extern "C" int sprintf(char* buf, const char* fmt, ...);
+
+/* main.dol cursor base */
+class CursorBase {
+public:
+    CursorBase(int port);                /* fn_800385A0 */
     const Vec2f* GetPos();               /* fn_800385B0 */
     const Vec2f* GetScale();             /* fn_800385D0 */
     void Activate(u8 a, u8 b);           /* fn_800385F0 */
@@ -191,16 +222,24 @@ public:
     BOOL IsHeld();                       /* fn_80039040 */
     CursorInfo GetInfo();                /* fn_80039450 */
 
+    u32 m0;
+};
+
+class HandCursor : public CursorBase, public CursorLayout {
+public:
+    ~HandCursor();
+    void Init();
+    void Setup(void* res);
+    void Update(TargetPane* pane);
+    static void UpdateCallback(void* self, int, void* pane); /* fn_18_22230 */
+
     PtrVector<HandCursor>& List() { return mMgr->mLists[mIndex]; }
 
-    void SetPicture(int picture);
     void SetScale(f32 scale) {
         ApplyScale(scale);
         mScale = scale;
     }
 
-    u32 m0;
-    CursorLayout mLayout;
     CursorManager* mMgr;
     int mPlayer;
     int mPriorityLayer;
@@ -215,5 +254,14 @@ public:
     int mIndex;
     int mOrder;
 };
+
+inline HandCursor* CursorManager::FindActive(int idx) {
+    for (int i = 0; i < mLists[idx].size(); i--) {
+        if (mLists[idx][i]->mPicture != 0) {
+            return mLists[idx][i];
+        }
+    }
+    return 0;
+}
 
 #endif

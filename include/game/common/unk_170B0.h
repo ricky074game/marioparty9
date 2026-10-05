@@ -6,11 +6,9 @@
 void* operator new(unsigned long size);
 void operator delete(void* p);
 
-/* Inline destructors get stray out-of-line weak copies from MWCC (the
-   original linker dead-stripped them); keep those in a separate section so
-   .text only holds the real functions. */
-#pragma section RX ".dtext"
-#define WEAK_DTOR __declspec(section ".dtext")
+/* Marks inline destructors that MWCC also emits as weak out-of-line copies
+   (dead-stripped by the original linker). */
+#define WEAK_DTOR
 
 /* main.dol base class (ctor fn_80071350, dtor fn_80071420) */
 class ProcBase {
@@ -98,9 +96,11 @@ class String {
 public:
     enum { kWords = 3 };
 
+    static unsigned long Length(const char* s) { return strlen(s); } /* char_traits::length */
+
     String(const char* s) {
         Zero();
-        unsigned long n = strlen(s);
+        unsigned long n = Length(s);
         reserve(n);
         Replace(0, 0, s, s + n, StrTag());
     }

@@ -25,7 +25,9 @@ inline void MslError(const char* msg) {
     abort();
 }
 
-struct InputIteratorTag {};
+struct Allocator {
+    Allocator() {}
+};
 
 template <class T>
 inline const T& Min(const T& a, const T& b) {
@@ -49,26 +51,28 @@ public:
     };
 
     String(const char* s) {
-        mWords[0] = 0;
-        mWords[1] = 0;
-        mWords[2] = 0;
-        size_t len = strlen(s);
-        reserve(len);
-        InputIteratorTag tag;
-        Replace(0, 0, s, s + len, tag);
+        size_t* p = mWords;
+        for (int i = 0; i < 3; i++) {
+            *p++ = 0;
+        }
+        Init(s, strlen(s));
     }
     ~String() {
-        if (mLong.is_long) {
-            delete mLong.data;
+        if (L().is_long) {
+            delete L().data;
         }
     }
 
     const Long& L() const { return *(const Long*)this; }
     const Short& S() const { return *(const Short*)this; }
-    size_t size() const { return !L().is_long ? S().size : L().size; }
+    size_t size() const {
+        bool l = L().is_long;
+        return !l ? S().size : L().size;
+    }
     const char* get(size_t& n) const {
         const char* p;
-        if (!L().is_long) {
+        bool l = L().is_long;
+        if (!l) {
             p = S().data;
             n = S().size;
         } else {
@@ -77,17 +81,22 @@ public:
         }
         return p;
     }
-    const char* data() const { return !L().is_long ? S().data : L().data; }
     static size_t max_size() { return 0x7FFFFFFE; }
 
-    void reserve(size_t n);
+    void reserve(size_t n); // fn_18_15E80
 
-    int compare(const char* s, size_t n2) const {
-        size_t n1 = size();
-        size_t sz;
-        const char* p = get(sz);
+    int compare(const String& str) const {
+        size_t n1;
+        size_t len2;
+        size_t n2;
+        const char* s = str.get(n2);
+        len2 = n2;
+        n1 = size();
+        size_t tmp;
+        const char* p = get(tmp);
+        size_t sz = tmp;
         size_t rlen = Min(sz, n1);
-        int result = memcmp(p, s, Min(rlen, n2));
+        int result = memcmp(p, s, Min(rlen, len2));
         if (result == 0) {
             if (rlen < n2) {
                 return -1;
@@ -99,19 +108,21 @@ public:
         }
         return result;
     }
-    int compare(const String& str) const {
-        size_t n2;
-        const char* s = str.get(n2);
-        return compare(s, n2);
-    }
 
-    void Replace(size_t pos, size_t n, const char* first, const char* last, InputIteratorTag tag);
+    void Init(const char* s, size_t len) {
+        reserve(len);
+        Init(s, s + len);
+    }
+    void Init(const char* first, const char* last) {
+        Replace(0, 0, first, last, Allocator());
+    }
+    // fn_18_16040
+    void Replace(size_t pos, size_t n, const char* first, const char* last, Allocator alloc);
 
     union {
         Long mLong;
         Short mShort;
         size_t mWords[3];
-        char mShortBytes[12];
     };
 };
 

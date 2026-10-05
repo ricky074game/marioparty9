@@ -77,12 +77,14 @@ def disassemble(obj: Path) -> Dict[str, List[str]]:
     funcs: Dict[str, List[str]] = {}
     order: List[str] = []
     cur: Optional[List[str]] = None
+    base = 0
     for line in out.splitlines():
-        m = re.match(r"^[0-9a-f]+ <(.*)>:", line)
+        m = re.match(r"^([0-9a-f]+) <(.*)>:", line)
         if m:
             cur = []
-            funcs[m[1]] = cur
-            order.append(m[1])
+            base = int(m[1], 16)
+            funcs[m[2]] = cur
+            order.append(m[2])
             continue
         if cur is None:
             continue
@@ -98,8 +100,18 @@ def disassemble(obj: Path) -> Dict[str, List[str]]:
                 cur[-1] = cur[-1] + f"  ; {target}"
             continue
         ins = re.sub(r"<[^>]*>", "", ins).strip()
+        # Make local branch targets relative to the function start
+        b = re.match(r"^(b\w*[+-]?)\s+((?:cr\d,)?)([0-9a-f]+)$", ins)
+        if b:
+            ins = f"{b[1]} {b[2]}.+0x{int(b[3], 16) - base:x}"
         cur.append(ins)
     return {name: funcs[name] for name in order}
+
+
+def weak_symbols(obj: Path) -> set:
+    nm = OBJDUMP.with_name(OBJDUMP.name.replace("objdump", "nm"))
+    out = subprocess.run([str(nm), str(obj)], capture_output=True, text=True).stdout
+    return {l.split()[-1] for l in out.splitlines() if len(l.split()) >= 3 and l.split()[-2] in ("W", "V")}
 
 
 def strip_comment(line: str) -> str:
@@ -140,6 +152,10 @@ def main() -> None:
         ours_obj = Path(tmp) / "ours.o"
         compile_source(ROOT / src, mw, cflags, ours_obj)
         ours = disassemble(ours_obj)
+        # Weak functions (out-of-line copies of inline functions) are dropped by
+        # the linker in the original build, so don't pair them by position.
+        weak = weak_symbols(ours_obj)
+        ours = {k: v for k, v in ours.items() if k not in weak}
     theirs = disassemble(target)
 
     t_names = [n for n in theirs if not n.startswith("gap_")]

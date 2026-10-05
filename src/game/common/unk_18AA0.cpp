@@ -22,14 +22,12 @@ int fn_80042D70(void* p);
 
 extern void* lbl_18_data_1A88[];
 
-#pragma section RX ".dtext"
 
 struct Handle {
-    void** mVt;
+    virtual ~Handle() {}
     void* mPtr;
 
-    __declspec(section ".dtext") ~Handle() {}
-    Handle(const Handle& o) : mVt(lbl_18_data_1A88), mPtr(fn_80042D70(o.mPtr) ? o.mPtr : 0) {}
+    Handle(const Handle& o) : mPtr(fn_80042D70(o.mPtr) ? o.mPtr : 0) {}
 };
 
 void fn_80049DC0(Handle h, int, int);
@@ -46,7 +44,7 @@ static inline void PlayWait(Handle h) {
 class noncopyable {
 protected:
     noncopyable() {}
-    __declspec(section ".dtext") ~noncopyable() {}
+    ~noncopyable() {}
 
 private:
     noncopyable(const noncopyable&);
@@ -57,7 +55,7 @@ template <typename T>
 struct AutoPtr : noncopyable {
     T* mPtr;
     AutoPtr(T* p) : mPtr(p) {}
-    __declspec(section ".dtext") ~AutoPtr() { delete mPtr; }
+    ~AutoPtr() { delete mPtr; }
     T* operator->() const { return mPtr; }
     T* get() const { return mPtr; }
 };
@@ -170,14 +168,14 @@ struct Sub : LayoutBase {
         x44 = fn_8004EF20();
         mText->SetNumber(num, 0);
         SetVisible(1);
-        Handle h = h8;
+        const Handle& h = Handle(h8);
         fn_80049DC0(h, 1, 1);
         while (!fn_8004A220(h)) {
             fn_80071590();
         }
     }
     void Close() {
-        Handle h = h10;
+        const Handle& h = Handle(h10);
         fn_80049DC0(h, 1, 1);
         while (!fn_8004A220(h)) {
             fn_80071590();
@@ -188,11 +186,22 @@ struct Sub : LayoutBase {
     }
 };
 
-#pragma section RW ".ddata"
-__declspec(section ".ddata") const char* sStrPad[] = {
-    "/layout/mess", "ns_mess_warning", "in", "out", "text", "sys900",
-    "/layout/mess_button", "a_button", "loop", "press_out",
-};
+void UseString(const char*);
+
+/* The original translation unit starts earlier (Sub's constructor etc.), whose
+   string literals precede ours in the string pool. Reproduce the pool layout. */
+__declspec(weak) void PoolStrings() {
+    UseString("/layout/mess");
+    UseString("ns_mess_warning");
+    UseString("in");
+    UseString("out");
+    UseString("text");
+    UseString("sys900");
+    UseString("/layout/mess_button");
+    UseString("a_button");
+    UseString("loop");
+    UseString("press_out");
+}
 
 int Sub::WaitButton(int player) {
     Pane* hook = FindPane("hook", true);
@@ -411,7 +420,7 @@ struct String {
         iter_tag tag;
         replace(0, 0, str, str + len, tag);
     }
-    __declspec(section ".dtext") ~String() {
+    ~String() {
         if (is_long()) {
             operator delete(l.ptr);
         }
@@ -481,8 +490,8 @@ void Outer::Run() {
         bool hasPartner = partner >= 0 && partner != i && mMask[partner];
         while (!fn_8006E290(fn_80070680(i)) || (hasPartner && !fn_8006E290(fn_80070680(mPartner)))) {
             const char* msg = mMsg.c_str();
-            int other = mPartner;
             int player = i;
+            int other = mPartner;
             if (hasPartner && !fn_8006E290(fn_80070680(other))) {
                 player = mPartner;
                 msg = "sys900";
@@ -519,7 +528,7 @@ struct OuterHolder {
     OuterHolder();
 };
 
-__declspec(section ".dtext") Outer::Outer() : mSub(new Sub), mMsg("sys900"), mPartner(-1) {
+__declspec(weak) Outer::Outer() : mSub(new Sub), mMsg("sys900"), mPartner(-1) {
     SetPrio(5);
     SetFlag(1);
     SetAttr(0x10);
