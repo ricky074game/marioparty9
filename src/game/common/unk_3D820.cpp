@@ -35,6 +35,21 @@ public:
     Quat mStart;   // 0xC4
     f32 mTime;     // 0xD4
     f32 mDuration; // 0xD8
+
+    void Step() {
+        if (mDuration != 0.0f) {
+            Quat q;
+            if (mTime >= mDuration) {
+                mDuration = 0.0f;
+                mTime = 0.0f;
+                q = mTarget;
+            } else {
+                mTime += lbl_8026E3B4;
+                fn_80193210(&mStart, &mTarget, &q, mTime / mDuration);
+            }
+            fn_80192460(&mMtx, &q);
+        }
+    }
 };
 
 /* main.dol character base */
@@ -67,22 +82,10 @@ public:
 void Char::Update() {
     fn_80065DF0();
     if (m1BC) {
-        HeadNode* node = m1BC.mPtr;
-        if (node->mDuration != 0.0f) {
-            Quat q;
-            if (node->mTime >= node->mDuration) {
-                node->mDuration = 0.0f;
-                node->mTime = 0.0f;
-                q = node->mTarget;
-            } else {
-                node->mTime += lbl_8026E3B4;
-                fn_80193210(&node->mStart, &node->mTarget, &q, node->mTime / node->mDuration);
-            }
-            fn_80192460(&node->mMtx, &q);
-        }
+        m1BC->Step();
     }
     if (!m1CD) {
-        bool b = fn_80061A70() == -1;
+        u32 b = fn_80061A70() == -1;
         if (!b) {
             m1C8 = false;
             m1CC = false;
@@ -92,16 +95,19 @@ void Char::Update() {
                 s32 x = fn_80061A60();
                 if (x != m1C4) {
                     m1C4 = x;
-                    m1C9 = !((fn_80062040(x) >> 3) & 1);
+                    m1C9 = ((fn_80062040(x) >> 3) & 1) ^ 1;
                 }
             }
             m1CC = m1C9;
         }
+        u8 v = m1CC;
         if (m1C0) {
-            u8 v = m1CA ? m1CC : 0;
+            if (!m1CA) {
+                v = 0;
+            }
             if (m1CB != v) {
                 m1CB = v;
-                fn_80062320(3, v ? 1.0f : 0.0f);
+                fn_80062320(3, v ? 100.0f : 0.0f);
             }
         }
     }
