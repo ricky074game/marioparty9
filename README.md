@@ -28,20 +28,25 @@ Supported versions:
 Status
 ======
 
-- `main.dol` is fully split and rebuilds byte-for-byte (`build/SSQP01/main.dol: OK`).
-- The game's 115 REL modules (`files/modules/*.rel.lz`: boards, minigames,
-  menus) are not tracked yet. They hold roughly 47 MB of code versus ~2.1 MB in
-  `main.dol`, and will be added once the DOL is in good shape.
+- `main.dol` and all 115 REL modules (`files/modules/*.rel.lz`: boards,
+  minigames, menus) are split and rebuild byte-for-byte.
 
 Progress
 --------
 
-Code matched and fully linked in `main.dol` (as of 2026-10-05; live numbers are on [decomp.dev][progress]):
+Code matched and fully linked (as of 2026-10-05; live numbers are on [decomp.dev][progress]):
 
 | Area | Matched | Progress |
 | --- | --- | --- |
-| **Overall code** | 21,680 / 2,159,960 bytes | **1.00%** |
-| **Overall data** | 2,224 / 1,130,636 bytes | **0.20%** |
+| **Overall code** | 21,680 / 50,288,252 bytes | **0.04%** |
+| **Overall data** | 2,224 / 7,315,136 bytes | **0.03%** |
+| `main.dol` code | 21,680 / 2,159,960 bytes | 1.00% |
+| REL modules code | 0 / 48,128,292 bytes | 0.00% |
+
+Within `main.dol`:
+
+| Area | Matched | Progress |
+| --- | --- | --- |
 | Game code | 0 / 1,495,896 bytes | 0.00% |
 | SDK & middleware (RVL SDK, NW4R, HBM, ...) | 2,220 / 577,420 bytes | 0.38% |
 | MSL_C (C standard library) | 16,844 / 54,708 bytes | 30.79% |
