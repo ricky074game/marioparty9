@@ -383,6 +383,50 @@ config.libs = [
 ]
 
 
+# Code shared by (statically linked into) most REL modules.
+# These units are split in every module containing the same code; see
+# tools/shared_split.py.
+config.libs += [
+    {
+        "lib": "REL",
+        "mw_version": "Wii/1.0",
+        "cflags": [*cflags_runtime, "-sdata 0", "-sdata2 0"],
+        "progress_category": "sdk",
+        "objects": [
+            Object(NonMatching, "REL/global_destructor_chain.c"),
+        ],
+    },
+    {
+        "lib": "game_common",
+        "mw_version": "Wii/1.3",
+        "cflags": cflags_rel,
+        "progress_category": "game",
+        "objects": [
+            Object(NonMatching, "game/common/unk_18AA0.cpp"),
+            Object(NonMatching, "game/common/unk_1AD40.cpp"),
+            Object(NonMatching, "game/common/unk_3CCC0.cpp"),
+            Object(NonMatching, "game/common/unk_170B0.cpp"),
+            Object(NonMatching, "game/common/unk_3D610.cpp"),
+            Object(NonMatching, "game/common/unk_2BB40.cpp"),
+            Object(NonMatching, "game/common/unk_3C2B0.cpp"),
+            Object(NonMatching, "game/common/unk_21DF0.cpp"),
+            Object(NonMatching, "game/common/unk_3C160.cpp"),
+            Object(NonMatching, "game/common/unk_277E0.cpp"),
+            Object(NonMatching, "game/common/unk_3D4D0.cpp"),
+            Object(NonMatching, "game/common/unk_2AE90.cpp"),
+            Object(NonMatching, "game/common/unk_21650.cpp"),
+            Object(NonMatching, "game/common/unk_21940.cpp"),
+            Object(NonMatching, "game/common/unk_21F80.cpp"),
+            Object(NonMatching, "game/common/unk_22260.cpp"),
+            Object(NonMatching, "game/common/unk_1B0C0.cpp"),
+            Object(NonMatching, "game/common/unk_15E80.cpp"),
+            Object(NonMatching, "game/common/unk_3D820.cpp"),
+            Object(NonMatching, "game/common/unk_3CF20.cpp"),
+        ],
+    },
+]
+
+
 # Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
 # This is called once per module, with the module ID and the current link order.
 #

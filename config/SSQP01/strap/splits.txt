@@ -5,3 +5,6 @@ Sections:
 	.rodata     type:rodata align:32
 	.data       type:data align:32
 	.bss        type:bss align:32
+
+game/common/unk_170B0.cpp:
+	.text       start:0x000003E0 end:0x0000059C

@@ -5,3 +5,64 @@ Sections:
 	.rodata     type:rodata align:32
 	.data       type:data align:32
 	.bss        type:bss align:32
+
+REL/global_destructor_chain.c:
+	.text       start:0x00000000 end:0x00000074
+	.dtors      start:0x00000000 end:0x00000004
+
+game/common/unk_277E0.cpp:
+	.text       start:0x0000C7E0 end:0x0000C918
+
+game/common/unk_15E80.cpp:
+	.text       start:0x0000F510 end:0x0000F6C8
+
+game/common/unk_170B0.cpp:
+	.text       start:0x0000FC10 end:0x0000FDCC
+
+game/common/unk_18AA0.cpp:
+	.text       start:0x000119C0 end:0x00012800
+
+game/common/unk_1AD40.cpp:
+	.text       start:0x00012960 end:0x00012C30
+
+game/common/unk_1B0C0.cpp:
+	.text       start:0x00012CE0 end:0x00012F4C
+
+game/common/unk_21650.cpp:
+	.text       start:0x00019AE0 end:0x00019DC8
+
+game/common/unk_21940.cpp:
+	.text       start:0x00019DD0 end:0x0001A27C
+
+game/common/unk_21DF0.cpp:
+	.text       start:0x0001A280 end:0x0001A3B8
+
+game/common/unk_21F80.cpp:
+	.text       start:0x0001A410 end:0x0001A6B4
+
+game/common/unk_22260.cpp:
+	.text       start:0x0001A6F0 end:0x0001A9B4
+
+game/common/unk_2AE90.cpp:
+	.text       start:0x0002C280 end:0x0002C380
+
+game/common/unk_2BB40.cpp:
+	.text       start:0x0002CF30 end:0x0002D09C
+
+game/common/unk_3C160.cpp:
+	.text       start:0x00040520 end:0x00040670
+
+game/common/unk_3C2B0.cpp:
+	.text       start:0x000406E0 end:0x00040828
+
+game/common/unk_3CCC0.cpp:
+	.text       start:0x00041150 end:0x0004139C
+
+game/common/unk_3D4D0.cpp:
+	.text       start:0x00041970 end:0x00041AAC
+
+game/common/unk_3D610.cpp:
+	.text       start:0x00041AB0 end:0x00041CB4
+
+game/common/unk_3D820.cpp:
+	.text       start:0x00041CC0 end:0x00041ECC
