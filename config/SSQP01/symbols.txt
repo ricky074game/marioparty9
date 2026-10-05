@@ -11445,6 +11445,7 @@ lbl_8026EDF8 = .sbss:0x8026EDF8; // type:object size:0x1 data:byte
 lbl_8026EDFC = .sbss:0x8026EDFC; // type:object size:0x4 data:4byte
 lbl_8026EE00 = .sbss:0x8026EE00; // type:object size:0x8 data:4byte
 __global_destructor_chain = .sbss:0x8026EE08; // type:object size:0x4 scope:global data:4byte
+lbl_8026EE10 = .sbss:0x8026EE10; // type:object size:0x8
 lbl_8026EE18 = .sbss:0x8026EE18; // type:object size:0x8 data:4byte
 errno = .sbss:0x8026EE20; // type:object size:0x8 data:4byte
 lbl_8026EE28 = .sbss:0x8026EE28; // type:object size:0x8 data:4byte
