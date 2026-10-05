@@ -3,18 +3,18 @@
 
 /* In the original translation unit these literals were already pooled by
    earlier functions (see fn_18_21030), ahead of the ones used below. */
-extern const char* const lbl_18_stringPoolHead[];
-const char* const lbl_18_stringPoolHead[] = {
+extern const char* const HandCursorStringPoolHead[];
+const char* const HandCursorStringPoolHead[] = {
     "Picture_00",
     "Picture_01",
     "Picture_02",
     "vector length error",
 };
 
-extern const char* lbl_18_layoutNames[];
+extern const char* HandCursorLayoutNames[];
 
 inline const char* GetLayoutName(int i) {
-    return lbl_18_layoutNames[i];
+    return HandCursorLayoutNames[i];
 }
 
 void HandCursor::Init() {
@@ -77,7 +77,7 @@ void HandCursor::Setup(void* res) {
     HAND_CURSOR_SET_PICTURE(this, mPicture);
 }
 
-const char* lbl_18_layoutNames[] = {
+const char* HandCursorLayoutNames[] = {
     "ch_base/pc_cursor", "ch_base/pc_cursor", "ch_base/pc_cursor", "ch_base/pc_cursor",
     "ch_base/pc_cursor", "ch_base/pc_cursor", "ch_base/pc_cursor", "ch_base/pc_cursor",
     "ch_base/pc_cursor", "ch_base/pc_cursor", "ch_base/pc_cursor", "ch_base/pc_cursor",
