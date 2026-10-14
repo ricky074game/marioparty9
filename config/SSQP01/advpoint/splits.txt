@@ -10,14 +10,49 @@ REL/global_destructor_chain.c:
 	.text       start:0x00000000 end:0x00000074
 	.dtors      start:0x00000000 end:0x00000004
 
+game/common/unk_3E40.cpp:
+	.text       start:0x00000320 end:0x00000394
+
+game/common/unk_15E00.cpp:
+	.text       start:0x00000710 end:0x00000784
+
 game/common/unk_15E80.cpp:
 	.text       start:0x00000790 end:0x00000948
+
+game/common/unk_16320.cpp:
+	.text       start:0x00000C30 end:0x00000EAC
+	.ctors      start:0x00000008 end:0x0000000C
+
+game/common/unk_17030.cpp:
+	.text       start:0x00000EB0 end:0x00000F14
 
 game/common/unk_170B0.cpp:
 	.text       start:0x00000F20 end:0x000010DC
 
+game/common/unk_17270.cpp:
+	.text       start:0x000010E0 end:0x000011A4
+
+game/common/unk_3A70.cpp:
+	.text       start:0x000011B0 end:0x0000122C
+
+game/common/unk_184E0.cpp:
+	.text       start:0x00002BA0 end:0x00003060
+	.ctors      start:0x0000000C end:0x00000010
+
+game/common/unk_5760.cpp:
+	.text       start:0x00003060 end:0x000030D0
+
 game/common/unk_18AA0.cpp:
 	.text       start:0x000030D0 end:0x00003F10
+
+game/common/unk_198E0.cpp:
+	.text       start:0x00003F10 end:0x00004038
+
+game/common/unk_1B890.cpp:
+	.text       start:0x000049A0 end:0x0000571C
+
+game/common/unk_4A90.cpp:
+	.text       start:0x00009B40 end:0x00009ED4
 
 game/common/unk_21650.cpp:
 	.text       start:0x0000A730 end:0x0000AA18
@@ -39,3 +74,26 @@ game/common/unk_2AE90.cpp:
 
 game/common/unk_2BB40.cpp:
 	.text       start:0x0000C170 end:0x0000C2DC
+
+game/common/unk_31BA0.cpp:
+	.text       start:0x00012ED0 end:0x00012F54
+
+game/common/unk_9C0.cpp:
+	.text       start:0x00013A40 end:0x00013AB8
+	.ctors      start:0x00000028 end:0x0000002C
+
+game/common/unk_31F20.cpp:
+	.text       start:0x00013AC0 end:0x0001471C
+
+game/common/unk_32C00.cpp:
+	.text       start:0x00014720 end:0x00015844
+
+game/common/unk_33D30.cpp:
+	.text       start:0x00015850 end:0x00016738
+
+game/common/unk_40A20.cpp:
+	.text       start:0x000169A0 end:0x00017474
+
+game/common/unk_41680.cpp:
+	.text       start:0x00017480 end:0x000174F8
+	.ctors      start:0x0000002C end:0x00000030

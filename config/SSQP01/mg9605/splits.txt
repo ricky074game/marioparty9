@@ -10,20 +10,86 @@ REL/global_destructor_chain.c:
 	.text       start:0x00000000 end:0x00000074
 	.dtors      start:0x00000000 end:0x00000004
 
+game/common/unk_9C0.cpp:
+	.text       start:0x00000630 end:0x000006A8
+	.ctors      start:0x00000000 end:0x00000004
+
+game/common/unk_5760.cpp:
+	.text       start:0x00000C10 end:0x00000C90
+
+game/common/unk_3A70.cpp:
+	.text       start:0x00003740 end:0x000037BC
+
+game/common/unk_72E0.cpp:
+	.text       start:0x00005600 end:0x00006DBC
+
+game/common/unk_3E40.cpp:
+	.text       start:0x0000F0C0 end:0x0000F134
+
+game/common/unk_15E00.cpp:
+	.text       start:0x00015CC0 end:0x00015D34
+
 game/common/unk_15E80.cpp:
 	.text       start:0x00015D40 end:0x00015EF8
+
+game/common/unk_16320.cpp:
+	.text       start:0x000161E0 end:0x000168EC
+	.ctors      start:0x00000020 end:0x00000024
+
+game/common/unk_1D480.cpp:
+	.text       start:0x00016DE0 end:0x000170C8
+
+game/common/unk_17030.cpp:
+	.text       start:0x00017FE0 end:0x00018054
 
 game/common/unk_170B0.cpp:
 	.text       start:0x00018060 end:0x0001821C
 
+game/common/unk_17270.cpp:
+	.text       start:0x00018220 end:0x000182E4
+
+game/common/unk_184E0.cpp:
+	.text       start:0x00019280 end:0x000197E0
+	.ctors      start:0x00000028 end:0x0000002C
+
 game/common/unk_18AA0.cpp:
 	.text       start:0x000197E0 end:0x0001A620
+
+game/common/unk_198E0.cpp:
+	.text       start:0x0001A620 end:0x0001A774
 
 game/common/unk_1AD40.cpp:
 	.text       start:0x0001A780 end:0x0001AA50
 
+game/common/unk_1B010.cpp:
+	.text       start:0x0001AA50 end:0x0001AAFC
+
 game/common/unk_1B0C0.cpp:
 	.text       start:0x0001AB00 end:0x0001AD6C
+
+game/common/unk_1B330.cpp:
+	.text       start:0x0001AD70 end:0x0001B33C
+
+game/common/unk_1B890.cpp:
+	.text       start:0x0001B710 end:0x0001C74C
+
+game/common/unk_4A90.cpp:
+	.text       start:0x0001F140 end:0x0001F454
+
+game/common/unk_1DA00.cpp:
+	.text       start:0x0001F580 end:0x0002036C
+
+game/common/unk_1E7F0.cpp:
+	.text       start:0x00020370 end:0x00021158
+
+game/common/unk_1F5E0.cpp:
+	.text       start:0x00021160 end:0x00021FB0
+
+game/common/unk_20430.cpp:
+	.text       start:0x00021FB0 end:0x00022BA4
+
+game/common/unk_21030.cpp:
+	.text       start:0x00022BB0 end:0x000231CC
 
 game/common/unk_21650.cpp:
 	.text       start:0x000231D0 end:0x000234B8
@@ -40,20 +106,135 @@ game/common/unk_21F80.cpp:
 game/common/unk_22260.cpp:
 	.text       start:0x00023DE0 end:0x000240A4
 
+game/common/unk_22530.cpp:
+	.text       start:0x000240B0 end:0x00024FF8
+
+game/common/unk_23480.cpp:
+	.text       start:0x00025000 end:0x00025C1C
+
+game/common/unk_24710.cpp:
+	.text       start:0x00026290 end:0x00026A78
+
+game/common/unk_25470.cpp:
+	.text       start:0x00026FF0 end:0x00027E00
+
+game/common/unk_26280.cpp:
+	.text       start:0x00027E10 end:0x00028A18
+
+game/common/unk_26F10.cpp:
+	.text       start:0x00028A20 end:0x000292F0
+
 game/common/unk_277E0.cpp:
 	.text       start:0x000292F0 end:0x00029428
+
+game/common/unk_27920.cpp:
+	.text       start:0x00029430 end:0x0002A094
+
+game/common/unk_28590.cpp:
+	.text       start:0x0002A0A0 end:0x0002AEA4
+
+game/common/unk_293A0.cpp:
+	.text       start:0x0002AEB0 end:0x0002B058
+
+game/common/unk_29630.cpp:
+	.text       start:0x0002B140 end:0x0002B1A8
+
+game/common/unk_2A240.cpp:
+	.text       start:0x0002BDF0 end:0x0002BE58
+
+game/common/unk_2A400.cpp:
+	.text       start:0x0002C470 end:0x0002C538
+
+game/common/unk_2A8E0.cpp:
+	.text       start:0x0002C9D0 end:0x0002CA38
+
+game/common/unk_2ABA0.cpp:
+	.text       start:0x00036EE0 end:0x00037380
 
 game/common/unk_2AE90.cpp:
 	.text       start:0x00037380 end:0x00037480
 
+game/common/unk_2AF90.cpp:
+	.text       start:0x00037480 end:0x00038028
+
 game/common/unk_2BB40.cpp:
 	.text       start:0x00038030 end:0x0003819C
+
+game/common/unk_2BD40.cpp:
+	.text       start:0x00038230 end:0x00038A0C
+
+game/common/unk_2DC40.cpp:
+	.text       start:0x0003A130 end:0x0003B540
+
+game/common/unk_2E8B0.cpp:
+	.text       start:0x0003B540 end:0x0003CA54
+
+game/common/unk_2F820.cpp:
+	.text       start:0x0003CA60 end:0x0003CE34
+
+game/common/unk_30170.cpp:
+	.text       start:0x0003D3B0 end:0x0003D85C
+
+game/common/unk_30A00.cpp:
+	.text       start:0x0003DB30 end:0x0003DFF4
+	.ctors      start:0x00000038 end:0x0000003C
+
+game/common/unk_31BA0.cpp:
+	.text       start:0x0003ECD0 end:0x0003ED54
+
+game/common/unk_31F20.cpp:
+	.text       start:0x0003F050 end:0x0003FD2C
+	.ctors      start:0x0000003C end:0x00000040
+
+game/common/unk_32C00.cpp:
+	.text       start:0x0003FD30 end:0x00040E54
+
+game/common/unk_33D30.cpp:
+	.text       start:0x00040E60 end:0x00041D48
+
+game/common/unk_34C20.cpp:
+	.text       start:0x00041D50 end:0x00042DD8
+
+game/common/unk_35710.cpp:
+	.text       start:0x00043260 end:0x00043FE8
+	.ctors      start:0x00000040 end:0x00000044
+
+game/common/unk_364A0.cpp:
+	.text       start:0x00043FF0 end:0x00044CA4
+	.ctors      start:0x00000044 end:0x00000048
+
+game/common/unk_37110.cpp:
+	.text       start:0x00044CB0 end:0x00045B84
+
+game/common/unk_37FF0.cpp:
+	.text       start:0x00045B90 end:0x0004679C
+	.ctors      start:0x00000048 end:0x0000004C
+
+game/common/unk_38C00.cpp:
+	.text       start:0x000467A0 end:0x0004738C
+
+game/common/unk_397F0.cpp:
+	.text       start:0x00047390 end:0x000480B0
+
+game/common/unk_3A510.cpp:
+	.text       start:0x00049830 end:0x0004B1A8
+	.ctors      start:0x00000050 end:0x00000054
+
+game/common/unk_3B290.cpp:
+	.text       start:0x0004B1B0 end:0x0004C53C
+
+game/common/unk_3C040.cpp:
+	.text       start:0x0004C540 end:0x0004CD80
+	.ctors      start:0x00000054 end:0x00000058
 
 game/common/unk_3C160.cpp:
 	.text       start:0x0004CD80 end:0x0004CED0
 
 game/common/unk_3C2B0.cpp:
 	.text       start:0x0004CED0 end:0x0004D018
+
+game/common/unk_3C400.cpp:
+	.text       start:0x0004D020 end:0x0004D8DC
 
 game/common/unk_3CCC0.cpp:
 	.text       start:0x0004D8E0 end:0x0004DB2C
@@ -66,3 +247,25 @@ game/common/unk_3D610.cpp:
 
 game/common/unk_3D820.cpp:
 	.text       start:0x0004E450 end:0x0004E65C
+
+game/common/unk_3DA30.cpp:
+	.text       start:0x0004E660 end:0x0004EE34
+	.ctors      start:0x00000058 end:0x0000005C
+
+game/common/unk_3E330.cpp:
+	.text       start:0x0004F130 end:0x0005012C
+	.ctors      start:0x0000005C end:0x00000060
+
+game/common/unk_3F180.cpp:
+	.text       start:0x00050130 end:0x00050D64
+
+game/common/unk_3FDC0.cpp:
+	.text       start:0x00050D70 end:0x000519E0
+
+game/common/unk_40A20.cpp:
+	.text       start:0x000519E0 end:0x00052634
+	.ctors      start:0x00000060 end:0x00000064
+
+game/common/unk_41680.cpp:
+	.text       start:0x00052640 end:0x00052738
+	.ctors      start:0x00000064 end:0x00000068

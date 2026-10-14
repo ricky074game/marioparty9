@@ -13,8 +13,32 @@ Sections:
 	.sbss2      type:bss align:32
 	.bss        type:bss align:64
 
+game/common/unk_16320.cpp:
+	.text       start:0x8000A9F0 end:0x8000AAB8
+
+game/common/unk_15E00.cpp:
+	.text       start:0x80024FF0 end:0x80025054
+
 game/common/unk_15E80.cpp:
 	.text       start:0x800250A0 end:0x80025258
+
+game/common/unk_293A0.cpp:
+	.text       start:0x80028250 end:0x80028520
+
+game/common/unk_17030.cpp:
+	.text       start:0x8002B160 end:0x8002BF50
+
+game/common/unk_3A70.cpp:
+	.text       start:0x80033470 end:0x800334EC
+
+game/common/unk_1D480.cpp:
+	.text       start:0x8003B590 end:0x8003CB58
+
+game/common/unk_2A400.cpp:
+	.text       start:0x8008D8F0 end:0x8008D9B8
+
+game/common/unk_4A90.cpp:
+	.text       start:0x80094C80 end:0x80095020
 
 revolution/base/PPCArch.c:
 	.text       start:0x8017BDC0 end:0x8017BFD0

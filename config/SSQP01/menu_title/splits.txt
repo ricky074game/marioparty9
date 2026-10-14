@@ -10,8 +10,27 @@ REL/global_destructor_chain.c:
 	.text       start:0x00000000 end:0x00000074
 	.dtors      start:0x00000000 end:0x00000004
 
+game/common/unk_17030.cpp:
+	.text       start:0x00000AE0 end:0x00000B20
+
 game/common/unk_15E80.cpp:
 	.text       start:0x00001ED0 end:0x00002088
 
+game/common/unk_5760.cpp:
+	.text       start:0x00008BA0 end:0x00008C20
+
+game/common/unk_3A70.cpp:
+	.text       start:0x0000D750 end:0x0000D7CC
+
 game/common/unk_170B0.cpp:
 	.text       start:0x00012E80 end:0x0001303C
+
+game/common/unk_17270.cpp:
+	.text       start:0x00013040 end:0x00013104
+
+game/common/unk_1B890.cpp:
+	.text       start:0x00014A80 end:0x0001528C
+
+game/common/unk_41680.cpp:
+	.text       start:0x00015340 end:0x000153B8
+	.ctors      start:0x0000002C end:0x00000030

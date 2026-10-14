@@ -7,7 +7,7 @@
 #
 # Usage:
 #   python tools/unitdiff.py <unit> [--module mg9101] [--mw Wii/1.3] [--cflags "..."]
-#       [--all] [--context N]
+#       [--all] [--context N] [--names-out names.txt]
 #
 # Example:
 #   python tools/unitdiff.py game/common/unk_170B0.cpp
@@ -133,6 +133,7 @@ def main() -> None:
     parser.add_argument("--cflags", help="full cflags override")
     parser.add_argument("--all", action="store_true", help="print full disassembly of mismatching functions")
     parser.add_argument("--context", type=int, default=3)
+    parser.add_argument("--names-out", type=Path, help='write "<target> <ours>" for each matching function')
     args = parser.parse_args()
 
     src = Path("src") / args.unit
@@ -161,6 +162,7 @@ def main() -> None:
     t_names = [n for n in theirs if not n.startswith("gap_")]
     o_names = list(ours)
     total = matched = 0
+    pairs = []
     print(f"{args.unit} vs {args.module} ({mw})")
     for i, tn in enumerate(t_names):
         tl = drop_padding(theirs[tn])
@@ -175,6 +177,7 @@ def main() -> None:
         oa = [strip_comment(x) for x in ol]
         if ta == oa:
             matched += size
+            pairs.append(f"{tn} {on}")
             print(f"  OK       {tn} <- {on} ({size} bytes)")
             continue
         sm = difflib.SequenceMatcher(None, ta, oa)
@@ -185,6 +188,8 @@ def main() -> None:
     for on in o_names[len(t_names):]:
         print(f"  EXTRA    {on}")
     print(f"matched {matched}/{total} bytes")
+    if args.names_out:
+        args.names_out.write_text("".join(p + "\n" for p in pairs))
 
 
 if __name__ == "__main__":
